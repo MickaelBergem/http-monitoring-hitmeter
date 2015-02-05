@@ -5,15 +5,21 @@ Monitoring tool written by Mickaël Bergem
 """
 import time
 import config
+import argparse
 from display import Display
 from httpmonitor import HttpMonitor
 
 
 if __name__ == '__main__':
-    # TODO: argument handling
-    logfile_path = '/tmp/demo.log'
+    parser = argparse.ArgumentParser(description="Monitor a log file of HTTP access")
+    parser.add_argument("logfile", help="Log file to monitor")
+    parser.add_argument("--alert-threshold", default=50,
+                        help="Number of hits within the alert delay that will raise an alert")
+    parser.add_argument("--alert-delay", default=2,
+                        help="Number of minutes we need to watch the traffic for")
+    args = parser.parse_args()
 
-    with open(logfile_path, 'r') as logfile_stream:
+    with open(args.logfile, 'r') as logfile_stream:
 
         # Initialize the monitor
         monitor = HttpMonitor(logfile_stream)

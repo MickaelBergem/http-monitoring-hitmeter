@@ -14,7 +14,7 @@ To run commands, you will need to activate the virtual environment with
 
 Then you can run the program :
 
-    python3 monitoring.py
+    python3 monitoring.py /var/log/apache2/access.log
 
 ## Running the tests
 
