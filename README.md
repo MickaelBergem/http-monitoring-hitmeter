@@ -1,5 +1,32 @@
 # HTTP log monitoring console program
 
+## Installation
+
+    virtualenv venv --python=python3
+    source venv/bin/activate
+    pip install -r requirements.txt
+
+## Usage
+
+To run commands, you will need to activate the virtual environment with
+
+    source venv/bin/activate
+
+Then you can run the program :
+
+    python3 monitoring.py
+
+## Running the tests
+
+    py.test tests.py
+
+Or to get the coverage :
+
+    pip install coverage
+    coverage run --source='.' -m py.test tests.py && coverage report -m
+
+## Initial instructions
+
 Create a simple console program that monitors HTTP traffic on your machine:
 
 * Consume an actively written-to w3c-formatted HTTP access log
