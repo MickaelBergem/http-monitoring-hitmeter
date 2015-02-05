@@ -31,17 +31,18 @@ class Display(object):
         self.screen.clear()
         self.screen.border(0)
         self.screen.addstr(1, 2, "Total hits : %d \t Total errors : %d" %
-           (self.monitor.total_hits, self.monitor.total_errors))
+                           (self.monitor.total_hits, self.monitor.total_errors))
 
         # We want to order the sections by their number of hits
         section_hits = sorted(self.monitor.sections_hits.items(),
                               key=lambda item: item[1],
                               reverse=True)
 
+        # Display each section with its hits number
         section_line_number = 4
         for section, hits in section_hits:
-            self.screen.addstr(section_line_number, 4, "%d\t%s" % (hits, section))
+            self.screen.addstr(section_line_number, 4,
+                               "%d\t%s" % (hits, section))
             section_line_number += 1
 
         self.screen.refresh()
-        #print("Demo, hits=%d" % self.monitor.total_hits)
