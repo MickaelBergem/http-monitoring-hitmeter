@@ -1,0 +1,13 @@
+::1 - - [17/Jun/2014:19:45:02 +0200] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.6 (Linux/SUSE) OpenSSL/1.0.1h (internal dummy connection)"
+127.0.0.1 - - [17/Jun/2014:20:04:52 +0200] "GET /phpMyAdmin/import.php HTTP/1.1" 200 8347 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36"
+::1 - - [27/Jun/2014:21:14:40 +0200] "GET /intranet/scripts/js/api.js HTTP/1.1" 304 - "http://localhost/intranet/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36"
+::1 - - [30/Jun/2014:01:11:40 +0200] "GET /favicon.ico HTTP/1.1" 404 1096 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+::1 - - [30/Jun/2014:01:14:55 +0200] "GET /test/ HTTP/1.1" 200 820 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36"
+::1 - - [30/Jun/2014:04:17:09 +0200] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.6 (Linux/SUSE) OpenSSL/1.0.1h (internal dummy connection)"
+::1 - - [30/Jun/2014:04:17:09 +0200] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.6 (Linux/SUSE) OpenSSL/1.0.1h (internal dummy connection)"
+::1 - - [30/Jun/2014:04:17:09 +0200] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.6 (Linux/SUSE) OpenSSL/1.0.1h (internal dummy connection)"
+127.0.0.1 - - [23/Jul/2014:20:09:28 +0200] "GET / HTTP/1.1" 403 1004 "-" "curl/7.32.0" "Apache/2.4.6 (Linux/SUSE) OpenSSL/1.0.1h (internal dummy connection)"
+127.0.0.1 - - [23/Jul/2014:20:09:28 +0200] "GET / HTTP/1.1" 101 1004 "-" "curl/7.32.0"
+127.0.0.1 - - [23/Jul/2014:20:09:28 +0200] "GET / HTTP/1.1" 501 1004 "-" "curl/7.32.0"
+127.0.0.1 - - [23/Jul/2014:20:09:28 +0200] "GET / HTTP/1.1" 301 1004 "-" "curl/7.32.0"
+Fake entry log !
