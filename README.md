@@ -1,5 +1,7 @@
 # HTTP log monitoring console program
 
+[ ![Codeship Status for MickaelBergem/test-datadog](https://codeship.com/projects/db2f8a20-90df-0132-649c-76ae55305aa6/status?branch=master)](https://codeship.com/projects/61603)
+
 ## Installation
 
     virtualenv venv --python=python3
