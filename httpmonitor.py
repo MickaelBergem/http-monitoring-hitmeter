@@ -4,6 +4,8 @@ Monitor
 The monitor represents the state of the application
 """
 import re
+import config
+from alertingsystem import AlertingSystem
 
 
 class HttpMonitor(object):
@@ -13,7 +15,9 @@ class HttpMonitor(object):
 
     requestformat = re.compile(r'(?P<method>\S+) (?P<request>(\*|/(?P<section>[^/]*)/(\S*)?|/(\S*)?)) (?P<protocol>[^ ]+)?')
 
-    def __init__(self, logfile_stream, cumulative=False):
+    def __init__(self, logfile_stream, cumulative=False,
+                 alert_threshold=config.DEFAULT_THRESHOLD,
+                 alert_delay=config.DEFAULT_DELAY):
         self.logfile_stream = logfile_stream
 
         self.cumulative = cumulative
@@ -21,6 +25,8 @@ class HttpMonitor(object):
         self.sections_hits = {}
         self.total_hits = 0
         self.total_errors = 0
+
+        self.alerting_system = AlertingSystem(alert_threshold, alert_delay)
 
         # Initial processing
         self._process_logs()
@@ -40,10 +46,13 @@ class HttpMonitor(object):
 
     def _process_logs(self):
         """ Process all the new lines since the last update """
+        new_hits = 0
+
         for log_line in self.logfile_stream:
             parsed_data = self._parse_log_entry(log_line)
 
             self.total_hits += 1
+            new_hits += 1
 
             if not parsed_data['well-formed']:
                 # Not able to understand this log entry : not an error hit, but nothing more
@@ -60,7 +69,12 @@ class HttpMonitor(object):
                 self.sections_hits[section] = 0
             self.sections_hits[section] += 1
 
+        # Update the traffic for the alerting system
+        self.alerting_system.update_traffic_stat(new_hits)
+
     def _parse_log_entry(self, entry):
+        """ Parse a single log entry and returns interesting information """
+
         parsed_data = self.w3clogformat.match(entry)
 
         if not parsed_data:

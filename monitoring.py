@@ -27,7 +27,10 @@ if __name__ == '__main__':
     with open(args.logfile, 'r') as logfile_stream:
 
         # Initialize the monitor
-        monitor = HttpMonitor(logfile_stream, cumulative=args.cumulative)
+        monitor = HttpMonitor(logfile_stream,
+                              cumulative=args.cumulative,
+                              alert_threshold=args.alert_threshold,
+                              alert_delay=args.alert_delay)
 
         # Initialize the console "display"
         display = Display(monitor)

@@ -11,7 +11,7 @@ from httpmonitor import HttpMonitor
 class HttpMonitorTest(unittest.TestCase):
 
     def setUp(self):
-        self.logfile_stream = open('fixtures/example_apache.log', 'r')
+        self.logfile_stream = open('tests/fixtures/example_apache.log', 'r')
         self.monitor = HttpMonitor(self.logfile_stream)
 
     def tearDown(self):
