@@ -12,18 +12,31 @@ class HttpMonitor(object):
     w3clogformat = re.compile(r'\A(?P<remoteHost>\S+) (?P<rfc931>\S+) (?P<authUser>\S+) \[(?P<date>[^\]]+)\] "(?P<rawRequest>[^"]*)" (?P<status>\d+) (?P<bytes>\S+)')
 
     requestformat = re.compile(r'(?P<method>\S+) (?P<request>(\*|/(?P<section>[^/]*)/(\S*)?|/(\S*)?)) (?P<protocol>[^ ]+)?')
-    #(?P<method>\S+) (?P<request>/(?P<section>[^/]*)(?:/\S*)?(?P<protocol> \S+)?)
 
-    def __init__(self, logfile_stream):
+    def __init__(self, logfile_stream, cumulative=False):
         self.logfile_stream = logfile_stream
+
+        self.cumulative = cumulative
 
         self.sections_hits = {}
         self.total_hits = 0
         self.total_errors = 0
 
+        # Initial processing
+        self._process_logs()
+
     def update(self):
         """ Update the metrics """
+
+        # Reset the sections hits counter if the cumulative mode is disabled
+        if not self.cumulative:
+            self.reset_sections_hits()
+
         self._process_logs()
+
+    def reset_sections_hits(self):
+        """ Reset the sections hits counter """
+        self.sections_hits = {section: 0 for section in self.sections_hits}
 
     def _process_logs(self):
         """ Process all the new lines since the last update """
