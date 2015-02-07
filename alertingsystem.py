@@ -17,8 +17,19 @@ class AlertingSystem(object):
         # For traffic analysis
         self.timed_hits = {}
 
-    def _check_for_alert(self):
-        pass
+        self.is_alerting = False
+
+    def check_for_alert(self):
+        """ Check if a threshold has been hit """
+        hit_number = self._get_number_of_hits()
+
+        if hit_number >= self.alert_threshold:
+            self.is_alerting = True
+            self.hit_number = hit_number
+        else:
+            self.is_alerting = False
+
+        return self.is_alerting
 
     def update_traffic_stat(self, new_hits):
         """ Update the `timed_hits` variable to keep track of the evolution
@@ -26,3 +37,14 @@ class AlertingSystem(object):
 
         block_time = int(time.time())
         self.timed_hits[block_time] = new_hits
+
+        # TODO: clean the old blocks
+
+    def _get_number_of_hits(self):
+        """ Returns the number of hits during the last `alert_delay` seconds """
+        current_time = time.time()
+        return sum([
+            hits
+            for timestamp, hits in self.timed_hits.iteritems()
+            if timestamp + self.alert_delay > current_time
+        ])
