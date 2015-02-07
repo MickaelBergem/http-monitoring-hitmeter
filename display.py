@@ -42,7 +42,7 @@ class Display(object):
         section_line_number = 4
         for section, hits in section_hits:
             self.screen.addstr(section_line_number, 4,
-                               "%d\t%s" % (hits, section))
+                               "%d  \t%s" % (hits, section))
             section_line_number += 1
 
         self.screen.refresh()
