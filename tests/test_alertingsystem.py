@@ -33,12 +33,17 @@ class AlertingSystemTest(unittest.TestCase):
 
     def test_check_for_alert(self):
 
+        self.alerting_system.check_for_alert()
+        self.assertEqual(len(self.alerting_system.messages), 0)
+
         # Ok state
         self.alerting_system.timed_hits = self.ok_state_timed_hits
+
         self.assertEqual(
             self.alerting_system.check_for_alert(),
             False,
         )
+        self.assertEqual(len(self.alerting_system.messages), 0)
 
         # Alert state
         self.alerting_system.timed_hits = self.alert_state_timed_hits
@@ -48,6 +53,10 @@ class AlertingSystemTest(unittest.TestCase):
         )
         self.assertEqual(self.alerting_system.is_alerting, True)
         self.assertEqual(self.alerting_system.hit_number, 140)
+        self.assertEqual(len(self.alerting_system.messages), 1)
+
+        self.alerting_system.check_for_alert()
+        self.assertEqual(len(self.alerting_system.messages), 1)
 
         # Recovery state
         self.alerting_system.timed_hits = self.ok_state_timed_hits
@@ -55,3 +64,4 @@ class AlertingSystemTest(unittest.TestCase):
             self.alerting_system.check_for_alert(),
             False,
         )
+        self.assertEqual(len(self.alerting_system.messages), 2)

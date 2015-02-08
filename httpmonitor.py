@@ -39,6 +39,7 @@ class HttpMonitor(object):
             self.reset_sections_hits()
 
         self._process_logs()
+        self.alerting_system.check_for_alert()
 
     def reset_sections_hits(self):
         """ Reset the sections hits counter """
