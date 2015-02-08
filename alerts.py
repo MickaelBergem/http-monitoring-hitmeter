@@ -19,8 +19,8 @@ class Alert(object):
         else:
             message = "High traffic generated an alert - hits = %d" % self.hit_number
 
-        return "%s, triggered at %s" \
-            % (message, self.time_alert.strftime('%H:%M (%d/%m)'))
+        return "%s %s" \
+            % (self.time_alert.strftime('[%d/%m %H:%M]'), message)
 
     def _format_time(self, seconds):
         """ Returns a human-friendly time """

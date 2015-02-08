@@ -15,7 +15,7 @@ class Display(object):
         self.time_start = time.time()
         self.screen = curses.initscr()
         curses.start_color()
-        curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
+        curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
         curses.curs_set(0)  # Hide the cursor
         self._draw()
 
@@ -76,6 +76,6 @@ class Display(object):
                            % len(self.monitor.alerting_system.messages))
 
         line_number = 2
-        for alert in self.monitor.alerting_system.messages:
+        for alert in reversed(self.monitor.alerting_system.messages):
             self.screen.addstr(line_number, offset_y_alerts, alert.message)
-            line_number += 1
+            line_number += 1 if alert.recovery else 2
