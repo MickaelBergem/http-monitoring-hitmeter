@@ -13,7 +13,7 @@ class HttpMonitor(object):
 
     w3clogformat = re.compile(r'\A(?P<remoteHost>\S+) (?P<rfc931>\S+) (?P<authUser>\S+) \[(?P<date>[^\]]+)\] "(?P<rawRequest>[^"]*)" (?P<status>\d+) (?P<bytes>\S+)')
 
-    requestformat = re.compile(r'(?P<method>\S+) (?P<request>(\*|/(?P<section>[^/]*)/(\S*)?|/(\S*)?)) (?P<protocol>[^ ]+)?')
+    requestformat = re.compile(r'(?P<method>\S+) (?P<request>(\*|/(?P<section>[^/]*)/\S*|/[^/]*)) (?P<protocol>[^ ]+)?')
 
     def __init__(self, logfile_stream, cumulative=False,
                  alert_threshold=config.DEFAULT_THRESHOLD,

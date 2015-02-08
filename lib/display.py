@@ -58,6 +58,7 @@ class Display(object):
 
         # Display each section with its hits number
         for section, hits in section_hits:
+            section = '/' + section if section else '/'
             self.screen.addstr(section_line_number, 4,
                                "%d  \t%s" % (hits, section))
             section_line_number += 1
