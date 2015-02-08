@@ -1,6 +1,6 @@
 import unittest
 import time
-from alertingsystem import AlertingSystem
+from lib.alertingsystem import AlertingSystem
 
 
 class AlertingSystemTest(unittest.TestCase):

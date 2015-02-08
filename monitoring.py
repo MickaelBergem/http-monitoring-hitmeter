@@ -6,8 +6,8 @@ Monitoring tool written by Mickaël Bergem
 import time
 import config
 import argparse
-from display import Display
-from httpmonitor import HttpMonitor
+from lib.display import Display
+from lib.httpmonitor import HttpMonitor
 
 
 if __name__ == '__main__':

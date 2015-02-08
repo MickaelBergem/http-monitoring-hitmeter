@@ -5,7 +5,7 @@ The monitor represents the state of the application
 """
 import re
 import config
-from alertingsystem import AlertingSystem
+from .alertingsystem import AlertingSystem
 
 
 class HttpMonitor(object):

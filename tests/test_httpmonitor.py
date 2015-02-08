@@ -6,7 +6,7 @@ Testing the HttpMonitor class
 
 import unittest
 import time
-from httpmonitor import HttpMonitor
+from lib.httpmonitor import HttpMonitor
 
 
 class HttpMonitorTest(unittest.TestCase):

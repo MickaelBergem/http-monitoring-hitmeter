@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from alerts import Alert
+from lib.alerts import Alert
 
 
 class AlertTest(unittest.TestCase):

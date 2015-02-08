@@ -4,7 +4,7 @@ Alerting system
 The alerting system keeps track of traffic peaks and raise alerts if needed
 """
 import time
-from alerts import Alert
+from .alerts import Alert
 
 
 class AlertingSystem(object):

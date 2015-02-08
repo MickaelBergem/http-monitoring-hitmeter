@@ -5,10 +5,10 @@ Monitoring tool written by Mickaël Bergem
 """
 import time
 import random
-from datetime import datetime
 import config
-from display import Display
 import argparse
+from datetime import datetime
+from lib.display import Display
 
 
 if __name__ == '__main__':
