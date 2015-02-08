@@ -2,6 +2,7 @@
 Display manager
 """
 import curses
+import time
 
 
 class Display(object):
@@ -11,6 +12,7 @@ class Display(object):
         # Attach the monitor
         self.monitor = monitor
         # Draw the screen a first time
+        self.time_start = time.time()
         self.screen = curses.initscr()
         curses.start_color()
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
@@ -30,6 +32,10 @@ class Display(object):
 
     def _draw(self):
         """ Draws the screen with the given data """
+
+        # Line where sections and hits begin
+        section_line_number = 4
+
         self.screen.clear()
         self.screen.border(0)
         self.screen.addstr(1, 2, "Total hits : %d" % self.monitor.total_hits)
@@ -39,9 +45,11 @@ class Display(object):
         if self.monitor.alerting_system.is_alerting:
             self.screen.addstr(1, 35, "[ALERT !]", curses.color_pair(1))
 
-        # Hit during the last minute
-        self.screen.addstr(3, 2, " Rate : %d hits/minute"
-                           % self.monitor.get_hits_rate(60))
+        # Hit during the last minute, shows only after a minute of running
+        if self.time_start + 60 < time.time():
+            self.screen.addstr(3, 2, " Rate : %d hits/minute"
+                               % self.monitor.get_hits_rate(60))
+            section_line_number += 1
 
         # We want to order the sections by their number of hits
         section_hits = sorted(self.monitor.sections_hits.items(),
@@ -49,7 +57,6 @@ class Display(object):
                               reverse=True)
 
         # Display each section with its hits number
-        section_line_number = 5
         for section, hits in section_hits:
             self.screen.addstr(section_line_number, 4,
                                "%d  \t%s" % (hits, section))
@@ -64,6 +71,7 @@ class Display(object):
 
         offset_y_alerts = 50
 
+        # Header
         self.screen.addstr(1, offset_y_alerts-1, "%d message(s)"
                            % len(self.monitor.alerting_system.messages))
 
