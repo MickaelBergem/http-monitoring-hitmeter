@@ -16,7 +16,13 @@ To run commands, you will need to activate the virtual environment with
 
 Then you can run the program :
 
-    python3 monitoring.py /var/log/apache2/access.log
+    python monitoring.py /var/log/apache2/access.log
+
+You can generate fake log entries to test the program with `demologfeeder.py` :
+
+    python demologfeeder.py -d 0.01 /tmp/demo.log
+
+![Demo](demo.png)
 
 ## Running the tests
 
@@ -25,7 +31,7 @@ Then you can run the program :
 Or to get the coverage :
 
     pip install coverage
-    coverage run --source='.' -m py.test tests.py && coverage report -m
+    coverage run --source='.' -m py.test tests && coverage report -m
 
 ## Initial instructions
 
