@@ -27,7 +27,7 @@ class AlertingSystemTest(unittest.TestCase):
 
         self.alerting_system.timed_hits = self.alert_state_timed_hits
 
-        hits = self.alerting_system._get_number_of_hits()
+        hits = self.alerting_system.get_number_of_hits()
 
         self.assertEqual(hits, 140)
 

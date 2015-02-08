@@ -27,7 +27,7 @@ class AlertingSystem(object):
 
     def check_for_alert(self):
         """ Check if a threshold has been hit """
-        hit_number = self._get_number_of_hits()
+        hit_number = self.get_number_of_hits()
 
         if hit_number >= self.alert_threshold:
             if not self.is_alerting:
@@ -62,11 +62,12 @@ class AlertingSystem(object):
 
         # TODO: clean the old blocks
 
-    def _get_number_of_hits(self):
-        """ Returns the number of hits during the last `alert_delay` seconds """
+    def get_number_of_hits(self, period=None):
+        """ Returns the number of hits during the last "period" seconds """
         current_time = int(time.time())
+        period = period or self.alert_delay
         return sum([
             hits
             for timestamp, hits in self.timed_hits.items()
-            if timestamp + self.alert_delay > current_time
+            if timestamp + period > current_time
         ])

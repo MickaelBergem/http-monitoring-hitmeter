@@ -5,6 +5,7 @@ Testing the HttpMonitor class
 """
 
 import unittest
+import time
 from httpmonitor import HttpMonitor
 
 
@@ -57,4 +58,27 @@ class HttpMonitorTest(unittest.TestCase):
                 None: 9,
                 'intranet': 1
             }
+        )
+
+    def test_reset_hits(self):
+        # Process
+        self.monitor._process_logs()
+
+        # Reset
+        self.monitor.reset_sections_hits()
+        for hits in self.monitor.sections_hits.values():
+            self.assertEqual(hits, 0)
+
+    def test_hit_rate(self):
+        base_time = int(time.time())
+        self.monitor.alerting_system.timed_hits = {
+            base_time-1: 50,
+            base_time-20: 90,
+            base_time-50: 40,
+            base_time-80: 15,
+        }
+
+        self.assertEqual(
+            self.monitor.get_hits_rate(60),
+            50+90+40
         )

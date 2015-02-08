@@ -45,6 +45,10 @@ class HttpMonitor(object):
         """ Reset the sections hits counter """
         self.sections_hits = {section: 0 for section in self.sections_hits}
 
+    def get_hits_rate(self, period=60):
+        """ Get the number of hits of the last 60s """
+        return self.alerting_system.get_number_of_hits(period)
+
     def _process_logs(self):
         """ Process all the new lines since the last update """
         new_hits = 0

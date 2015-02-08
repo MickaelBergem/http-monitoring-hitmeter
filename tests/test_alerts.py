@@ -12,7 +12,7 @@ class AlertTest(unittest.TestCase):
         self.assertEqual(
             alert1.message,
             'High traffic generated an alert - hits = 100, triggered at %s'
-             % alert1.time_alert.strftime('%H:%m (%d/%m)')
+             % alert1.time_alert.strftime('%H:%M (%d/%m)')
         )
 
         alert2 = Alert(50, recovery=True,
@@ -22,5 +22,5 @@ class AlertTest(unittest.TestCase):
         self.assertEqual(
             alert2.message,
             'Alert recovered after 2 minute(s) and 30 second(s), hits are now 50, triggered at %s'
-            % alert2.time_alert.strftime('%H:%m (%d/%m)')
+            % alert2.time_alert.strftime('%H:%M (%d/%m)')
         )
